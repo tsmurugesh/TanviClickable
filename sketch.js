@@ -90,7 +90,7 @@ function setup() {
 // Very simple, sets the background color and calls your state machine function
 // easing calculations
 function draw() {
-  background("#fbcd15");
+  //background("#fbcd15");
 
   mouseEasing();
 
@@ -102,126 +102,36 @@ function draw() {
 
 //-- drawOne() will draw the image at index 0 from the array
 drawOne = function() {
-   push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("anger", a, b);
-   pop();
-
-   image(images[0], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("anger", a, b);
-   pop();
+   background("pink");
 }
 
 //-- drawTwo() will draw the image at index 1 from the array
 drawTwo = function() {
-   push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("ill", a, b);
-   pop();
-
-   image(images[1], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("ill", a, b);
-   pop();
+   background("blue");
 
 }
 
 //-- drawOne() will draw the image at index 2 from the array
 drawThree = function() {
-   push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("sleepy", a,b);
-   pop();
-
-   image(images[2], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("sleepy", a, b);
-   pop();
+   background("yellow");
 
 }
 
 //-- drawOne() will draw the image at index 3 from the array
 drawFour = function() {
-   push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("stressed", a, b);
-   pop();
-
-   image(images[3], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("stressed", a, b);
-   pop();
+   background("purple");
 }
 
 //-- drawOne() will draw the image at index 4 from the array
 drawFive = function() {
-   push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("vibing", a, b);
-   pop();
-
-   image(images[4], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("vibing", a, b);
-   pop();
+   background("green");
 
 }
 
 
 //-- drawSplash() will draw the image at index 4 from the array
 drawSplash = function() {
-  push();
-   textSize(50);
-   fill("#e8eff4");
-   noStroke();
-   text("click me", a, b);
-   pop();
-
-   image(images[5], width/2, height/2);
-
-   push();
-   textSize(50);
-   stroke("#e8eff4");
-   strokeWeight(2);
-   noFill();
-   text("click me", a, b);
-   pop();
+  text("match the colors in the time frame!");
 }
 
 //-- drawInst() will draw text array with the intructions
