@@ -38,23 +38,17 @@ var images = [];
 
 // Array of text
 var textButtons  = [];
-var textButtonXPos = 40;
+var textButtonYPos = 360;
 var lineHeight = 50;
 var startY = 300;
 
 var midX;
 var midY;
-
-// easing variables 
-var a = 1;
-var b = 1;
-var easing = 0.08;
+var simpleTimer;
+var biteCount;
 
 // variable that is a function 
 var drawFunction;
-
-// offset from bottom of screen
-var gTextOffset = 100;
 
 // load all images and text into an array
 function preload() {
@@ -62,8 +56,13 @@ function preload() {
   images[1] = loadImage('assets/tutti.png');
   images[2] = loadImage('assets/cottoncandsy.png');
   images[3] = loadImage('assets/bdaycake.png');
-  images[4] = loadImage('assets/gingham.jpg');
+  images[4] = loadImage('assets/purple.jpg');
   images[5] = loadImage('assets/bowl.png');
+  images[6] = loadImage('assets/pink.jpg');
+  images[7] = loadImage('assets/yellow.jpg');
+  images[8] = loadImage('assets/blue.jpg');
+  images[9] = loadImage('assets/rainbow.jpg');
+
 
 }
 
@@ -75,16 +74,18 @@ function setup() {
   imageMode(CENTER);
   textAlign(CENTER);
   textSize(30);
-  textFont("Fugaz One");
+  textFont("Patrick Hand");
 
   // easing information
   midY = height/2;
   midX = width/2;
 
-  textButtons[0] = makeTextButton("mango", textButtonXPos, 100);
-  textButtons[1] = makeTextButton("tutti frutti", textButtonXPos, 140);
-  textButtons[2] = makeTextButton("cotton candy", textButtonXPos, 180);
-  textButtons[3] = makeTextButton("birthday cake", textButtonXPos, 220);
+  simpleTimer = new Timer(10000);
+
+  textButtons[0] = makeTextButton("mango", 25, textButtonYPos);
+  textButtons[1] = makeTextButton("tutti frutti",  140, textButtonYPos);
+  textButtons[2] = makeTextButton("cotton candy",  260, textButtonYPos);
+  textButtons[3] = makeTextButton("birthday cake",  375, textButtonYPos);
 
   // set to one for startup
   drawFunction = drawSplash;
@@ -152,36 +153,103 @@ function gotoRoom(roomName){
 //-- drawOne() will draw the image at index 0 from the array
 drawOne = function() {
    background("orange");
+   image(images[7], midX, midY, width, height);
    image(images[5], midX, midY);
    image(images[0], midX, midY);
+
+   text("click to take enough bites \n before the timer runs out!", midX, midY-200);
+   text("Time: " + Math.round(simpleTimer.getRemainingTime()), midX, midY-120);
+
+   if (simpleTimer.expired()) {
+        if ( biteCount < 10 ) {
+            text("try again",midX,midY+150);
+            if ( mouseIsPressed ) {
+                simpleTimer.start();
+            }
+        } 
+        else {
+            text("good job, press 's' to return",midX,midY+150);
+        }
+    } 
 }
 
 //-- drawTwo() will draw the image at index 1 from the array
 drawTwo = function() {
    background("pink");
+   image(images[6], midX, midY, width, height);
    image(images[5], midX, midY);
    image(images[1], midX, midY);
+
+   text("click to take enough bites \n before the timer runs out!", midX, midY-200);
+   text("Time: " + Math.round(simpleTimer.getRemainingTime()), midX, midY-120);
+
+   if (simpleTimer.expired()) {
+        if ( biteCount < 10 ) {
+            text("try again",midX,midY+150);
+            if ( mouseIsPressed ) {
+                simpleTimer.start();
+            }
+        } 
+        else {
+            text("good job, press 's' to return",midX,midY+150);
+        }
+    } 
 
 }
 
 //-- drawOne() will draw the image at index 2 from the array
 drawThree = function() {
    background("blue");
+   image(images[8], midX, midY, width, height);
    image(images[5], midX, midY);
    image(images[2], midX, midY);
+
+   text("click to take enough bites \n before the timer runs out!", midX, midY-200);
+   text("Time: " + Math.round(simpleTimer.getRemainingTime()), midX, midY-120);
+
+   if (simpleTimer.expired()) {
+        if ( biteCount < 10 ) {
+            text("try again",midX,midY+150);
+            if ( mouseIsPressed ) {
+                simpleTimer.start();
+            }
+        } 
+        else {
+            text("good job, press 's' to return",midX,midY+150);
+        }
+    } 
 
 }
 
 //-- drawOne() will draw the image at index 3 from the array
 drawFour = function() {
    background("yellow");
+  image(images[9], midX, midY, width, height);
    image(images[5], midX, midY);
    image(images[3], midX, midY);
+
+   text("click to take enough bites \n before the timer runs out!", midX, midY-200);
+   text("Time: " + Math.round(simpleTimer.getRemainingTime()), midX, midY-120);
+
+   if (simpleTimer.expired()) {
+        if ( biteCount < 10 ) {
+            text("try again",midX,midY+150);
+            if ( mouseIsPressed ) {
+                simpleTimer.start();
+            }
+        } 
+        else {
+            text("good job, press 's' to return",midX,midY+150);
+        }
+    } 
 }
 
 //-- drawSplash() will draw the image at index 4 from the array
 drawSplash = function() {
   background("red");
+  image(images[4], midX, midY, width, height);
+
+  biteCount= 0;
   text("home!",midX,midY);
   drawButtons();
 }
@@ -226,7 +294,10 @@ function keyTyped() {
 
 function mousePressed() {
   // only change state if we are in splash screen
-  if( drawFunction === drawSplash ) {
-    drawFunction = drawInst;
+  // if( drawFunction === drawSplash ) {
+  //   drawFunction = drawInst;
+  // }
+  if(drawFunction === drawOne ){
+     biteCount++;
   }
 }
