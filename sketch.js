@@ -250,21 +250,10 @@ drawSplash = function() {
   image(images[4], midX, midY, width, height);
 
   biteCount= 0;
-  text("home!",midX,midY);
+  text("select a flavor!",midX,midY);
   drawButtons();
 }
 
-
-// mouse easing stuff all in one place
-function mouseEasing(){
-  let targetX = mouseX;
-  let dx = targetX - a;
-  a += dx * easing;
-
-  let targetY = mouseY;
-  let dy = targetY - b;
-  b += dy * easing;
-}
 
 
 //========= TEMPLATE: add or change interface functions, as you like =========
@@ -273,19 +262,6 @@ function mouseEasing(){
 function keyTyped() {
   if( drawFunction === drawSplash ) {
     return;
-  }
-
-  if( key === '1' ) {
-  	drawFunction = drawOne;
-  }
-  else if( key === '2' ) {
-  	drawFunction = drawTwo;
-  }
-  else if( key === '3' ) {
-  	drawFunction = drawThree;
-  }
-  else if( key === '4' ) {
-  	drawFunction = drawFour;
   }
   else if( key === 's' ) {
     drawFunction = drawSplash;
