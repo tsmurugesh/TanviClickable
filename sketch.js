@@ -37,15 +37,18 @@
 var images = [];
 
 // Array of text
-var instructions  = [];
+var textButtons  = [];
+var textButtonXPos = 40;
 var lineHeight = 50;
 var startY = 300;
+
+var midX;
+var midY;
 
 // easing variables 
 var a = 1;
 var b = 1;
 var easing = 0.08;
-var cursor;
 
 // variable that is a function 
 var drawFunction;
@@ -55,25 +58,18 @@ var gTextOffset = 100;
 
 // load all images and text into an array
 function preload() {
-  images[0] = loadImage('assets/anger.png');
-  images[1] = loadImage('assets/ill.png');
-  images[2] = loadImage('assets/sleepy.png');
-  images[3] = loadImage('assets/stressed.png');
-  images[4] = loadImage('assets/vibe.png');
-  images[5] = loadImage('assets/splash.png');
-
-  instructions[0] = "☆welcome to my mood states!☆";
-  instructions[1] = "☆use 1-5 to look through the moods☆";
-  instructions[2] = "☆use 's' to go back to splash page☆";
-  instructions[3] = "☆use 'i' to remind yourself of the intructions☆";
-
-  cursor = loadImage('assets/cursor.png');
+  images[0] = loadImage('assets/mango.png');
+  images[1] = loadImage('assets/tutti.png');
+  images[2] = loadImage('assets/cottoncandsy.png');
+  images[3] = loadImage('assets/bdaycake.png');
+  images[4] = loadImage('assets/gingham.jpg');
+  images[5] = loadImage('assets/bowl.png');
 
 }
 
 // Center drawing, drawFunction will be one for default
 function setup() {
-  createCanvas(800,800);
+  createCanvas(500,500);
 
   // Center our drawing objects
   imageMode(CENTER);
@@ -82,6 +78,13 @@ function setup() {
   textFont("Fugaz One");
 
   // easing information
+  midY = height/2;
+  midX = width/2;
+
+  textButtons[0] = makeTextButton("mango", textButtonXPos, 100);
+  textButtons[1] = makeTextButton("tutti frutti", textButtonXPos, 140);
+  textButtons[2] = makeTextButton("cotton candy", textButtonXPos, 180);
+  textButtons[3] = makeTextButton("birthday cake", textButtonXPos, 220);
 
   // set to one for startup
   drawFunction = drawSplash;
@@ -92,57 +95,97 @@ function setup() {
 function draw() {
   //background("#fbcd15");
 
-  mouseEasing();
+  //mouseEasing();
 
   // will call your state machine function
   drawFunction();
 }
 
+function drawButtons(){
+  for(let i = 0; i < textButtons.length; i++){
+    textButtons[i].draw();
+  }
+}
+
+//========= BUTTON MAKING ========= //
+function makeTextButton(label, x, y){
+  let tb = new Clickable();
+
+  tb.text = label;
+
+  tb.width = 100;
+  tb.height = 30;
+
+  tb.locate(x, y);
+
+  tb.onPress = textButtonPressed;
+  // tb.onHover = textButtonOnHover;
+  // tb.onOutside = textButtonOnOutside;
+
+  return tb;
+}
+
+//========= CALLBACK ========= //
+textButtonPressed = function(){
+  gotoRoom(this.text);
+}
+
+//========= NAV ========= //
+function gotoRoom(roomName){
+  if (roomName === "mango"){
+    drawFunction = drawOne;
+  }
+  else if (roomName === "tutti frutti"){
+    drawFunction = drawTwo;
+  }
+  else if (roomName === "cotton candy"){
+    drawFunction = drawThree;
+  }
+  else if (roomName === "birthday cake"){
+    drawFunction = drawFour;
+  }
+}
+
+
 //========= TEMPLATE: modify these functions, INSIDE the function blocks only =========
 
 //-- drawOne() will draw the image at index 0 from the array
 drawOne = function() {
-   background("pink");
+   background("orange");
+   image(images[5], midX, midY);
+   image(images[0], midX, midY);
 }
 
 //-- drawTwo() will draw the image at index 1 from the array
 drawTwo = function() {
-   background("blue");
+   background("pink");
+   image(images[5], midX, midY);
+   image(images[1], midX, midY);
 
 }
 
 //-- drawOne() will draw the image at index 2 from the array
 drawThree = function() {
-   background("yellow");
+   background("blue");
+   image(images[5], midX, midY);
+   image(images[2], midX, midY);
 
 }
 
 //-- drawOne() will draw the image at index 3 from the array
 drawFour = function() {
-   background("purple");
+   background("yellow");
+   image(images[5], midX, midY);
+   image(images[3], midX, midY);
 }
-
-//-- drawOne() will draw the image at index 4 from the array
-drawFive = function() {
-   background("green");
-
-}
-
 
 //-- drawSplash() will draw the image at index 4 from the array
 drawSplash = function() {
-  text("match the colors in the time frame!");
+  background("red");
+  text("home!",midX,midY);
+  drawButtons();
 }
 
-//-- drawInst() will draw text array with the intructions
-drawInst = function(){
-  image(cursor, a, b);
-
-  fill("red");
-  for (let i = 0; i < instructions.length; i++ ){
-    text(instructions[i], width/2, startY + (i*lineHeight));
-  }
-}
 
 // mouse easing stuff all in one place
 function mouseEasing(){
@@ -154,6 +197,7 @@ function mouseEasing(){
   let dy = targetY - b;
   b += dy * easing;
 }
+
 
 //========= TEMPLATE: add or change interface functions, as you like =========
 
@@ -175,14 +219,8 @@ function keyTyped() {
   else if( key === '4' ) {
   	drawFunction = drawFour;
   }
-  else if( key === '5' ) {
-  	drawFunction = drawFive;
-  }
   else if( key === 's' ) {
     drawFunction = drawSplash;
-  }
-  else if( key === 'i' ) {
-    drawFunction = drawInst;
   }
 }
 
