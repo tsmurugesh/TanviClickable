@@ -2,16 +2,8 @@
 #### by Tanvi Murugesh
 
 ### Overview
-This is a simple state machine that goes between five states , in this case moods, and starts with a splash screen
+This is a simple state machine that to practice using the timer and clickable
 
 
 ### How it works
-array of images gets loaded at startup
-
-drawFunction is a VARIABLE that points to a function varible name
-
-drawOne(), drawTwo(), etc. are set to be functions.
-
-the the keys 1-5, 'i', and 's' key will change the drawFunction variable
-
-starts with drawSplash and waits for a mousePressed event
+The main screen, splash screen, has 4 clickable buttons that take you to 4 different flavors (states).On each page you have to click an unknown amount of times before the timer runs out. Each flavor has a slightly different amount of clicks! 
